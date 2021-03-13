@@ -233,84 +233,80 @@ class Mahasiswa extends CI_Controller
         $this->load->view('/layout/footer');
     }
 
-    public function bot()
-    {
-        $token = '1186559289:AAGca1hmtsMZ8kWM2-qwh82SMvVq8Idp5Vo';
-        $update = file_get_contents('php://input');
-        $update = json_decode($update);
+    // public function bot()
+    // {
+    //     // $token = '1186559289:AAGca1hmtsMZ8kWM2-qwh82SMvVq8Idp5Vo';
+    //     $token = '1656518494:AAHszaJPn02ClWw8Cg0TMvARyhkPG2DQJ5U';
+    //     $update = file_get_contents('php://input');
+    //     $update = json_decode($update);
 
-        $client = $update->message;
-        $client_id = $client->from->id ? $client->from->id : null;
+    //     $client = $update->message;
+    //     $client_id = $client->from->id ? $client->from->id : null;
 
-        // print_r($this->M_mahasiswa->db->get_where('mahasiswa', ['nim' => $client->text])->row());
-        // die;
-        // var_dump($update);
-        // $hear = $client->text;
-        // $nim = $this->M_mahasiswa->db->get_where('mahasiswa', ['nim' => $hear])->row();
-        // print_r($nim->nim);
-        // die();
+    //     // print_r($this->M_mahasiswa->db->get_where('mahasiswa', ['nim' => $client->text])->row());
+    //     // die;
+    //     // var_dump($update);
+    //     // $hear = $client->text;
+    //     // $nim = $this->M_mahasiswa->db->get_where('mahasiswa', ['nim' => $hear])->row();
+    //     // print_r($nim->nim);
+    //     // die();
 
-        if ($client_id) {
-            // $client_text = $client->text ? $client->text : 'nothing';
-            // $client_first_name = $client->from->first_name ? $client->from->first_name : 'anonim';
-            // $client_last_name = $client->from->last_name ? $client->from->last_name : 'anonim';
-            // $client_full_name = $client_first_name . '' . $client_last_name;
-            // $reply_message = 'hello ' . $client_full_name;
-            $client_username = $client->from->username;
-            $hear = $client->text;
-            $jmlmhs = $this->M_mahasiswa->db->from('mahasiswa')->count_all_results();
-            $datamhs = $this->M_mahasiswa->db->get_where('mahasiswa', ['nim' => $hear])->row();
+    //     if ($client_id) {
+    //         // $client_text = $client->text ? $client->text : 'nothing';
+    //         // $client_first_name = $client->from->first_name ? $client->from->first_name : 'anonim';
+    //         // $client_last_name = $client->from->last_name ? $client->from->last_name : 'anonim';
+    //         // $client_full_name = $client_first_name . '' . $client_last_name;
+    //         // $reply_message = 'hello ' . $client_full_name;
+    //         $client_username = $client->from->username;
+    //         $hear = $client->text;
+    //         $jmlmhs = $this->M_mahasiswa->db->from('mahasiswa')->count_all_results();
+    //         $datamhs = $this->M_mahasiswa->db->get_where('mahasiswa', ['nim' => $hear])->row();
 
-            if ($hear == '/jumlah') {
-                $response = 'jumlah seluruh mahasiswa <b>' . "\n" . $jmlmhs . ' jiwa</b>';
-            } elseif ($hear == $datamhs->nim) {
-                $response =
-                    '<b>' . $datamhs->nim . "</b>\n\n" .
-                    'Nama : <b>' . $datamhs->nama . "</b>\n" .
-                    'Alamat : <b>' . $datamhs->alamat . "</b>\n";
-                // } else {
-                //     $response = 'masukkan NIM untuk mencari data mahasiswa';
-                // }
-            } else {
-                $response = 'hello @' . $client_username  . "\n\n" .
-                    'silahkan gunakan command yang tersedia' . "\n" .
-                    '======================================' . "\n" .
-                    'ketik /jumlah - untuk mengetahui jumlah seluruh mahasiswa' . "\n" .
-                    'ketik <b>NIM(181240000xxx)</b> - untuk mencari data mahasiswa' . "\n";
-            }
+    //         if ($hear == '/jumlah') {
+    //             $response = 'jumlah seluruh mahasiswa <b>' . "\n" . $jmlmhs . ' jiwa</b>';
+    //         } elseif ($hear == $datamhs->nim) {
+    //             $response =
+    //                 '<b>' . $datamhs->nim . "</b>\n\n" .
+    //                 'Nama : <b>' . $datamhs->nama . "</b>\n" .
+    //                 'Alamat : <b>' . $datamhs->alamat . "</b>\n";
+    //             // } else {
+    //             //     $response = 'masukkan NIM untuk mencari data mahasiswa';
+    //             // }
+    //         } else {
+    //             $response = 'hello @' . $client_username  . "\n\n" .
+    //                 'silahkan gunakan command yang tersedia' . "\n" .
+    //                 '======================================' . "\n" .
+    //                 'ketik /jumlah - untuk mengetahui jumlah seluruh mahasiswa' . "\n" .
+    //                 'ketik <b>NIM(181240000xxx)</b> - untuk mencari data mahasiswa' . "\n";
+    //         }
 
-            $data = [
-                'chat_id' => 821856771,
-                // 'text' => 'hy @' . $client_username
-                'text' => $response,
-                'parse_mode' => 'html'
-            ];
-        }
-        $method = '/sendMessage?';
-        $this->_responseBot($token, $method, $data);
-    }
+    //         $data = [
+    //             'chat_id' => $client_id,
+    //             // 'text' => 'hy @' . $client_username
+    //             'text' => $response,
+    //             'parse_mode' => 'html'
+    //         ];
+    //     }
+    //     $method = '/sendMessage?';
+    //     $this->_responseBot($token, $method, $data);
+    // }
 
-    private function _responseBot($token, $method, $data)
-    {
-        $url = 'https://api.telegram.org/bot' . $token . $method;
+    // private function _responseBot($token, $method, $data)
+    // {
+    //     $url = 'https://api.telegram.org/bot' . $token . $method;
 
-        if (!$curld = curl_init()) {
-            exit;
-        }
-        curl_setopt($curld, CURLOPT_POST, true);
-        curl_setopt($curld, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($curld, CURLOPT_URL, $url);
-        curl_setopt($curld, CURLOPT_RETURNTRANSFER, true);
+    //     if (!$curld = curl_init()) {
+    //         exit;
+    //     }
+    //     curl_setopt($curld, CURLOPT_POST, true);
+    //     curl_setopt($curld, CURLOPT_POSTFIELDS, $data);
+    //     curl_setopt($curld, CURLOPT_URL, $url);
+    //     curl_setopt($curld, CURLOPT_RETURNTRANSFER, true);
 
-        $output = curl_exec($curld);
-        curl_close($curld);
-        return $output;
-    }
-
-    public function coba()
-    {
-        // print_r($this->M_mahasiswa->db->get_where('mahasiswa', ['nim' => $nim])->row());
-    }
+    //     $output = curl_exec($curld);
+    //     curl_close($curld);
+    //     return $output;
+    // }
 
     // $nim = 1812400008;
     // var_dump($this->db->get_where('mahasiswa', ['nim' => $nim])->result());
