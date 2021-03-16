@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Mar 2021 pada 03.46
+-- Waktu pembuatan: 16 Mar 2021 pada 04.16
 -- Versi server: 10.4.6-MariaDB
 -- Versi PHP: 7.3.9
 
@@ -21,6 +21,17 @@ SET time_zone = "+00:00";
 --
 -- Database: `macaksci3`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `bot`
+--
+
+CREATE TABLE `bot` (
+  `id` int(11) NOT NULL,
+  `hear` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -1043,9 +1054,67 @@ INSERT INTO `mahasiswa` (`id`, `nim`, `nama`, `email`, `alamat`) VALUES
 (1002, '181240000262', 'Prof. Bailey Trantow', 'rodriguez.kelton@example.org', '083 Murazik Pike\nWest Milesland, MN 53859'),
 (1003, '181240000853', 'Ari Leuschke', 'seamus.legros@example.net', '353 Reichel Spring Apt. 959\nKelvinfort, AK 50565');
 
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `nilai`
+--
+
+CREATE TABLE `nilai` (
+  `id` int(11) NOT NULL,
+  `ta` varchar(6) NOT NULL,
+  `kd_makul` varchar(12) NOT NULL,
+  `makul` varchar(64) NOT NULL,
+  `nilai` varchar(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `nilai`
+--
+
+INSERT INTO `nilai` (`id`, `ta`, `kd_makul`, `makul`, `nilai`) VALUES
+(1, '2018-1', 'TIF503', 'Pemrograman Terstruktur', 'A'),
+(2, '2018-1', 'TIF504', 'Sistem dan Teknologi Informasi', 'AB'),
+(3, '2018-2', 'TIF505', 'Pemrograman Web', 'A'),
+(4, '2018-2', 'TIF506', 'Basis Data', 'A'),
+(5, '2019-1', 'TIF507', 'Pemrograman Web Lanjut', 'A'),
+(6, '2019-1', 'TIF508', 'Basis Data Lanjut', 'AB'),
+(7, '2019-2', 'TIF508', 'Rekayasa Perangkat Lunak', 'AB'),
+(8, '2019-2', 'TIF508', 'Pemrograman Berorientasi Objek', 'B'),
+(9, '2020-1', 'TIF508', 'Rekayasa Perangkat Lunak', 'A'),
+(10, '2020-2', 'TIF508', 'Pemrograman Berorientasi Objek Lanjut', 'AB');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `ta`
+--
+
+CREATE TABLE `ta` (
+  `ta` varchar(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `ta`
+--
+
+INSERT INTO `ta` (`ta`) VALUES
+('2018-1'),
+('2018-2'),
+('2019-1'),
+('2019-2'),
+('2020-1'),
+('2020-2');
+
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indeks untuk tabel `bot`
+--
+ALTER TABLE `bot`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeks untuk tabel `mahasiswa`
@@ -1054,14 +1123,49 @@ ALTER TABLE `mahasiswa`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks untuk tabel `nilai`
+--
+ALTER TABLE `nilai`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ta` (`ta`);
+
+--
+-- Indeks untuk tabel `ta`
+--
+ALTER TABLE `ta`
+  ADD PRIMARY KEY (`ta`);
+
+--
 -- AUTO_INCREMENT untuk tabel yang dibuang
 --
+
+--
+-- AUTO_INCREMENT untuk tabel `bot`
+--
+ALTER TABLE `bot`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
 
 --
 -- AUTO_INCREMENT untuk tabel `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1005;
+
+--
+-- AUTO_INCREMENT untuk tabel `nilai`
+--
+ALTER TABLE `nilai`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `nilai`
+--
+ALTER TABLE `nilai`
+  ADD CONSTRAINT `nilai_ibfk_1` FOREIGN KEY (`ta`) REFERENCES `ta` (`ta`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
