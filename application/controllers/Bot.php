@@ -43,16 +43,20 @@ class Bot extends CI_Controller
 
     public function index()
     {
-        $token = '1186559289:AAH1OHBybUiba_KvmOLGPxm79TaIu105BcE';
+        $token = '1186559289:AAHYRAoLQG0HddMP6XSlyz7dcsGb-w60nGE';
         $update = file_get_contents('php://input');
         $update = json_decode($update);
 
         $id = $update->message->from->id;
         $username = $update->message->chat->username;
         $hear = $update->message->text;
+
+        // hapus keyboard
         $rmkeyboard = [
             'remove_keyboard' => true
         ];
+
+        // keyboard menu
         $keyboard = [
             'keyboard' => [
                 [
@@ -165,12 +169,6 @@ class Bot extends CI_Controller
                                 '<b>' . $n->makul . ' (' . $n->kd_makul . ")</b>\n" .
                                 'Nilai : <b>' . $n->nilai . "</>\n\n";
                         }
-                        // $nilai = $this->M_mahasiswa->db->where(['ta' => '2018-1'])->get('nilai')->row();
-                        // $response =
-                        //     'Daftar Nilai TA <b>' . $nilai->ta . "</b>\n\n" .
-                        //     'Kode: <b>' . $nilai->kd_makul . "</b>\n" .
-                        //     'Makul : <b>' . $nilai->makul . "</b>\n" .
-                        //     'Nilai : <b>' . $nilai->nilai . "</b>\n\n\n";
                         $reply_markup = json_encode($keyboard);
                     } else {
                         $response = 'masukkan TA';
