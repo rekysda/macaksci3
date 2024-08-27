@@ -7,15 +7,15 @@ class Simple_bot extends CI_Controller
 
     public function index()
     {
-        $token = '1186559289:AAH1OHBybUiba_KvmOLGPxm79TaIu105BcE';
+        $token = '7525171945:AAFjf3Q2dpbBeGOCjmfUC_V7pp7wXdx3r6c';
         $method = 'sendMessage?';
         $data = [
-            'chat_id' => 821856771,
+            'chat_id' => 7307834218,
             'text' => 'hellooooooooooooooooooo'
         ];
         // print_r($data);
         // die;
-        $url = 'https://api.telegram.org/' . $token . '/' . $method;
+        $url = 'https://api.telegram.org/bot' . $token . '/' . $method;
         $ch = curl_init();
 
         if ($ch) {
@@ -26,8 +26,8 @@ class Simple_bot extends CI_Controller
 
             $return =  curl_exec($ch);
             curl_close($ch);
-            return $return;
-            // print_r($return);
+            //return $return;
+             print_r($return);
         } else {
             exit;
         }
